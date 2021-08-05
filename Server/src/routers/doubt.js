@@ -12,7 +12,19 @@ doubtRouter.get("/doubts", Authenticate, async (req, res) => {
         doubts = await Doubt.find({ status: "pending" });
         res.status(200).send(doubts);
     } catch (err) {
-        console.log(err);
+        res.status(500).send(err)
+    }
+});
+
+//Display My Doubts 
+//-----------------------------------------
+doubtRouter.get("/myDoubts", Authenticate, async (req, res) => {
+    const askedBy = req.rootUser.email
+    try {
+        doubts = await Doubt.find({ askedBy: askedBy });
+        res.status(200).send(doubts);
+    } catch (err) {
+        res.status(500).send(err)
     }
 });
 
@@ -29,7 +41,7 @@ doubtRouter.post("/askDoubt", Authenticate, async (req, res) => {
         await doubt.save();
         res.status(201).json({ message: "Doubt asked successfully" });
     } catch (err) {
-        console.log(err);
+        res.status(500).send(err)
     }
 });
 
@@ -58,6 +70,7 @@ doubtRouter.delete("/deleteDoubt/:id", Authenticate, async (req, res) => {
         res.status(500).send(err)
     }
 });
+
 //Answer Doubt
 //--------------------
 doubtRouter.put("/answerDoubt/:id", Authenticate, async (req, res) => {
