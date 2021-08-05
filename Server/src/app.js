@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const app = express();
 
 const User = require("./models/userSchema");
@@ -38,6 +39,37 @@ app.post("/register", async (req, res) => {
             const user = new User({ name, email, password });
             await user.save();
             res.status(201).json({ message: "User registered successfully" });
+        }
+    } catch (err) {
+        console.log(err);
+    }
+});
+
+//User login
+//-----------------------------------------
+app.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
+            return res.status(400).json({ error: "Fill both the fields" });
+        }
+        const userLogin = await User.findOne({ email: email });
+        if (userLogin) {
+            const isMatch = await bcrypt.compare(password, userLogin.password);
+
+            if (!isMatch) {
+                return res.status(400).json({ error: "Invalid Credentials" });
+            } else {
+                const token = await userLogin.generateAuthToken();
+                console.log("token:", token);
+                res.cookie("jwtoken", token, {
+                    expires: new Date(Date.now + 25892000000),
+                    httpOnly: true,
+                });
+                return res.json({ message: "User signedin successfully" });
+            }
+        } else {
+            return res.status(400).json({ error: "Invalid Credentials" });
         }
     } catch (err) {
         console.log(err);
