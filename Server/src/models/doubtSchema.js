@@ -12,7 +12,7 @@ const doubtSchema = new mongoose.Schema({
     answer: {
         type: String,
     },
-    answerdBy: {
+    answeredBy: {
         type: String,
     },
     status: {

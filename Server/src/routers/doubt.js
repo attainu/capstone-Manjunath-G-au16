@@ -33,4 +33,23 @@ doubtRouter.post("/askDoubt", Authenticate, async (req, res) => {
     }
 });
 
+//Answer Doubt
+//--------------------
+doubtRouter.put("/answerDoubt", Authenticate, async (req, res) => {
+    const answeredBy = req.rootUser.email
+    const { id, answer } = req.body;
+    const status = "answered"
+    try {
+        await Doubt.findById(id, (error, Update) => {
+            Update.status = String(status);
+            Update.answer = String(answer);
+            Update.answeredBy = String(answeredBy);
+            Update.save();
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    res.status(200).send("Answered");
+});
+
 module.exports = doubtRouter;
