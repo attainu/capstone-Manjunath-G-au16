@@ -5,6 +5,17 @@ const Doubt = require("../models/doubtSchema");
 const Authenticate = require("../middleware/authenticate");
 doubtRouter.use(express.json())
 
+//Display Doubts 
+//-----------------------------------------
+doubtRouter.get("/doubts", Authenticate, async (req, res) => {
+    try {
+        doubts = await Doubt.find({ status: "pending" });
+        res.status(200).send(doubts);
+    } catch (err) {
+        console.log(err);
+    }
+});
+
 //ask Doubt 
 //-----------------------------------------
 doubtRouter.post("/askDoubt", Authenticate, async (req, res) => {

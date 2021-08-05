@@ -1,12 +1,8 @@
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const express = require("express");
-const bcrypt = require("bcryptjs");
 const app = express();
-
-const User = require("./models/userSchema");
 const cookieParser = require("cookie-parser");
-const Authenticate = require("./middleware/authenticate");
 app.use(cookieParser());
 
 dotenv.config({ path: "./config.env" });
@@ -14,6 +10,7 @@ dotenv.config({ path: "./config.env" });
 require("./db/conn");
 
 app.use(require("./routers/user"));
+app.use(require("./routers/doubt"));
 
 app.use(express.json());
 
