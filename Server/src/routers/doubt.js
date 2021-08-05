@@ -33,6 +33,21 @@ doubtRouter.post("/askDoubt", Authenticate, async (req, res) => {
     }
 });
 
+//Edit Doubt
+//--------------------
+doubtRouter.put("/editDoubt", Authenticate, async (req, res) => {
+    const { id, question } = req.body;
+    try {
+        await Doubt.findById(id, (error, Update) => {
+            Update.question = String(question);
+            Update.save();
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    res.status(200).send("Updated");
+});
+
 //Answer Doubt
 //--------------------
 doubtRouter.put("/answerDoubt", Authenticate, async (req, res) => {
