@@ -35,36 +35,44 @@ doubtRouter.post("/askDoubt", Authenticate, async (req, res) => {
 
 //Edit Doubt
 //--------------------
-doubtRouter.put("/editDoubt", Authenticate, async (req, res) => {
-    const { id, question } = req.body;
+doubtRouter.put("/editDoubt/:id", Authenticate, async (req, res) => {
     try {
-        await Doubt.findById(id, (error, Update) => {
-            Update.question = String(question);
-            Update.save();
-        });
+        const _id = req.params.id
+        const doubt = await Doubt.findByIdAndUpdate(_id, req.body, {
+            new: true
+        })
+        res.status(200).send(doubt)
     } catch (err) {
-        console.log(err);
+        res.status(500).send(err)
     }
-    res.status(200).send("Updated");
 });
 
+//Delete Doubt
+//--------------------
+doubtRouter.delete("/deleteDoubt/:id", Authenticate, async (req, res) => {
+    try {
+        const _id = req.params.id
+        const doubt = await Doubt.findByIdAndDelete(_id)
+        res.status(200).send(doubt)
+    } catch (err) {
+        res.status(500).send(err)
+    }
+});
 //Answer Doubt
 //--------------------
-doubtRouter.put("/answerDoubt", Authenticate, async (req, res) => {
-    const answeredBy = req.rootUser.email
-    const { id, answer } = req.body;
-    const status = "answered"
+doubtRouter.put("/answerDoubt/:id", Authenticate, async (req, res) => {
     try {
-        await Doubt.findById(id, (error, Update) => {
-            Update.status = String(status);
-            Update.answer = String(answer);
-            Update.answeredBy = String(answeredBy);
-            Update.save();
-        });
+        const answer = req.body.answer
+        const answeredBy = req.rootUser.email
+        const status = "answered"
+        const _id = req.params.id
+        const doubt = await Doubt.findByIdAndUpdate(_id, { answer, answeredBy, status }, {
+            new: true
+        })
+        res.status(200).send(doubt)
     } catch (err) {
-        console.log(err);
+        res.status(500).send(err)
     }
-    res.status(200).send("Answered");
 });
 
 module.exports = doubtRouter;
