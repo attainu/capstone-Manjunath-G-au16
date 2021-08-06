@@ -3,10 +3,10 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 
 .Toastify__toast--dark {
-  background: $clr-2;
+  background: $secondary-clr $i;
 }
 .Toastify__progress-bar {
-  background: $clr-1 $i;
+  background: $primary-clr $i;
 }
 #signinup {
   background: linear-gradient(155deg, #fff 50%, $primary-clr 50%);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Heading from '../Common/Heading/Heading';
 import { useHistory } from "react-router-dom";
 import "./Answered.scss"
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Answered = () => {
     const [doubts, setDoubts] = useState([])
@@ -36,10 +37,11 @@ const Answered = () => {
     return (
         <>
             <Heading heading="Answered" />
+            {loading ? <div className="loaderx"><ScaleLoader
+                color={"#2b343b"} loading={loading} size={0} /></div> : <></>}
             
             <div className="answered-sec">
                 <h1>You Answered Doubts</h1>
-            {(loading === true) && <h3>Loading....</h3>}
                 {
                     doubts.map((item, index) => {
                         return (

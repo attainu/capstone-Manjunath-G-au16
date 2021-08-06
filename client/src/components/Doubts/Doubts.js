@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import Heading from '../Common/Heading/Heading';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 
 const Doubts = () => {
@@ -66,6 +67,7 @@ const Doubts = () => {
             const data = await res.json();
             setDoubt(data);
             console.log(data);
+            console.log(data.question);
             if (!res.status === 200) {
                 const error = new Error(res.error);
                 throw error;
@@ -101,11 +103,12 @@ const Doubts = () => {
     return (
         <>
             <Heading heading="Doubts" />
+            {loading ? <div className="loaderx"><ScaleLoader
+                color={"#2b343b"} loading={loading} size={0} /></div> : <></>}
 
             {(active === true) ?
                 <div className="doubts-sec">
 
-                    {(loading === true) && <h3>Loading....</h3>}
                     {
                         doubts.slice(pagesVisited, pagesVisited + usersPerPage).map((item, index) => {
                             return (
@@ -116,17 +119,18 @@ const Doubts = () => {
                             )
                         })
                     }
-                    <ReactPaginate
-                        previousLabel={"Previous"}
-                        nextLabel={"Next"}
-                        pageCount={pageCount}
-                        onPageChange={changePage}
-                        containerClassName={"paginationBttns"}
-                        previousLinkClassName={"previousBttn"}
-                        nextLinkClassName={"nextBttn"}
-                        disabledClassName={"paginationDisabled"}
-                        activeClassName={"paginationActive"}
-                    />
+                    {(loading === false) &&
+                        <ReactPaginate
+                            previousLabel={"Previous"}
+                            nextLabel={"Next"}
+                            pageCount={pageCount}
+                            onPageChange={changePage}
+                            containerClassName={"paginationBttns"}
+                            previousLinkClassName={"previousBttn"}
+                            nextLinkClassName={"nextBttn"}
+                            disabledClassName={"paginationDisabled"}
+                            activeClassName={"paginationActive"}
+                        />}
                 </div>
                 :
                 <div className="doubts-sec">

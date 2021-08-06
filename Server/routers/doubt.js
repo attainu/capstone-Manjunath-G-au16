@@ -22,7 +22,7 @@ doubtRouter.get("/doubts", Authenticate, async (req, res) => {
 doubtRouter.get("/doubts/:id", Authenticate, async (req, res) => {
     try {
         const _id = req.params.id
-        doubt = await Doubt.find({ _id: _id });
+        doubt = await Doubt.findOne({ _id: _id });
         res.status(200).send(doubt);
     } catch (err) {
         res.status(500).send(err)
