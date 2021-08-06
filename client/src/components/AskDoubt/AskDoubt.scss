@@ -1,0 +1,29 @@
+@import "../../scss/defaults.scss";
+@import "../../scss/variables.scss";
+.askdoubt-sec {
+    @include grid-center;
+    width: 78vw;
+    textarea {
+        width: 75vw;
+        height: 50vh;
+        border-radius: 10px;
+        border: 5px solid $primary-clr;
+        outline: none;
+        padding: 10px;
+    }
+    
+    .btn {
+        @include grid-center;
+        margin-top: 10px;
+        button {
+            background: $primary-clr;
+            color: $clrWhite;
+            padding: 10px 20px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-top-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+    }
+}

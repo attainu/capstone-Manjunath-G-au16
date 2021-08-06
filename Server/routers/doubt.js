@@ -15,7 +15,17 @@ doubtRouter.get("/doubts", Authenticate, async (req, res) => {
         res.status(500).send(err)
     }
 });
-
+//Display Particular Doubts 
+//-----------------------------------------
+doubtRouter.get("/doubts/:id", Authenticate, async (req, res) => {
+    try {
+        const _id = req.params.id
+        doubt = await Doubt.find({ _id: _id });
+        res.status(200).send(doubt);
+    } catch (err) {
+        res.status(500).send(err)
+    }
+});
 //Display My Doubts 
 //-----------------------------------------
 doubtRouter.get("/myDoubts", Authenticate, async (req, res) => {
@@ -28,6 +38,17 @@ doubtRouter.get("/myDoubts", Authenticate, async (req, res) => {
     }
 });
 
+//Display Answered
+//-----------------------------------------
+doubtRouter.get("/answered", Authenticate, async (req, res) => {
+    const answeredBy = req.rootUser.email
+    try {
+        doubts = await Doubt.find({ answeredBy: answeredBy });
+        res.status(200).send(doubts);
+    } catch (err) {
+        res.status(500).send(err)
+    }
+});
 //ask Doubt 
 //-----------------------------------------
 doubtRouter.post("/askDoubt", Authenticate, async (req, res) => {

@@ -26,6 +26,13 @@ const Sidebar = () => {
                         </NavLink>
                     </li>
                     <li className="list">
+                        <NavLink className="nav-link" to="/askDoubt">
+                            <span className="icon">
+                                <i className="fas fa-question-circle"></i></span>
+                            <span className="title">Ask Doubts</span>
+                        </NavLink>
+                    </li>
+                    <li className="list">
                         <NavLink className="nav-link" to="/myDoubts">
                             <span className="icon">
                                 <i className="fas fa-question-circle"></i></span>
@@ -36,7 +43,7 @@ const Sidebar = () => {
                         <NavLink className="nav-link" to="/answered">
                             <span className="icon">
                                 <i className="fas fa-question-circle"></i></span>
-                            <span className="title">Answered</span>
+                            <span className="title">You Answered</span>
                         </NavLink>
                     </li>
                     <li className="list">

@@ -1,0 +1,62 @@
+@import "../../scss/defaults.scss";
+@import "../../scss/variables.scss";
+.mydoubts-sec {
+    @include grid-center;
+    gap: 20px;
+    width: 78vw;
+    .resolved-sec {
+        width: 75vw;
+        margin: 0 auto;
+        background: $secondary-clr;
+        color: $clrWhite;
+        border-radius: 10px;
+        h3 {
+            padding: 10px;
+            color: $clrWhite;
+        }
+        button {
+            float: right;
+            background: $primary-clr;
+            color: $clrWhite;
+            padding: 10px 20px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-top-left-radius: 10px;
+        }
+    }
+
+    .pending-sec {
+        width: 75vw;
+        margin: 0 auto;
+        background: $secondary-clr;
+        color: $clrWhite;
+        border-radius: 10px;
+        padding: 10px;
+        h3 {
+            padding: 10px;
+            color: $clrWhite;
+        }
+        textarea {
+            width: 100%;
+            height: 50vh;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            padding: 10px;
+        }
+        .btn {
+            @include grid-center;
+            margin-top: 10px;
+        }
+        button {
+            background: $primary-clr;
+            color: $clrWhite;
+            padding: 10px 20px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+    }
+}

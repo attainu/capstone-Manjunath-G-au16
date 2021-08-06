@@ -1,0 +1,18 @@
+@import "../../scss/defaults.scss";
+@import "../../scss/variables.scss";
+.answered-sec {
+    @include grid-center;
+    gap: 20px;
+    width: 78vw;
+    .ans-sec {
+        width: 75vw;
+        margin: 0 auto;
+        background: $secondary-clr;
+        color: $clrWhite;
+        border-radius: 10px;
+        h3,h4{
+            padding: 10px;
+            color: $clrWhite;
+        }
+    }
+}

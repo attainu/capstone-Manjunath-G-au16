@@ -7,7 +7,7 @@ const Authenticate = require("../middleware/authenticate");
 userRouter.use(express.json())
 
 
-userRouter.get("/", Authenticate, (req, res) => {
+userRouter.get("/", (req, res) => {
     res.send("Hello Server from userRouter");
 });
 
