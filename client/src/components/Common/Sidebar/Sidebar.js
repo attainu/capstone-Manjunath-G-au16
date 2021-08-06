@@ -16,6 +16,10 @@ const Sidebar = () => {
     return (
         <div className="nav">
             <div className="navigation">
+                <div className="logo">
+                    <i className="fas fa-chalkboard-teacher"></i>
+                    <h2>DCP</h2>
+                </div>
                 <ul>
                     <li className="list active">
                         <NavLink className="nav-link" to="/doubts">

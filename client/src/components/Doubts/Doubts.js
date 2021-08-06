@@ -10,7 +10,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Doubts = () => {
     const [doubts, setDoubts] = useState([])
-    const [doubt, setDoubt] = useState([])
+    const [doubt, setDoubt] = useState({})
     const [answerr, setAnswer] = useState("")
     const [active, setActive] = useState()
     const [loading, setLoading] = useState(true)
@@ -67,7 +67,6 @@ const Doubts = () => {
             const data = await res.json();
             setDoubt(data);
             console.log(data);
-            console.log(data.question);
             if (!res.status === 200) {
                 const error = new Error(res.error);
                 throw error;
@@ -134,21 +133,15 @@ const Doubts = () => {
                 </div>
                 :
                 <div className="doubts-sec">
-                    {
-                        doubt.map((item, index) => {
-                            return (
-                                <div key={index} className="answer-sec">
-                                    <button onClick={goBack}>back</button>
-                                    <h3>{item.question}</h3>
-                                    <textarea name="answer" placeholder="answer"
-                                        onChange={(e) => setAnswer(e.target.value)}></textarea>
-                                    <div className="btn">
-                                        <button onClick={() => postAnswer(item._id)}>Submit</button>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                    <div className="answer-sec">
+                        <button onClick={goBack}>back</button>
+                        <h3>{doubt.question}</h3>
+                        <textarea name="answer" placeholder="answer"
+                            onChange={(e) => setAnswer(e.target.value)}></textarea>
+                        <div className="btn">
+                            <button onClick={() => postAnswer(doubt._id)}>Submit</button>
+                        </div>
+                    </div>
                 </div>
             }
 

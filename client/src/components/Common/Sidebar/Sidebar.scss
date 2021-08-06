@@ -1,3 +1,5 @@
+@import "../../../scss/defaults.scss";
+@import "../../../scss/variables.scss";
 .nav {
     .navigation {
         position: fixed;
@@ -5,7 +7,18 @@
         width: 20vw;
         background: #2b343b;
         box-shadow: 1vw 0 0 #4187f6;
-        border-left: 1vw solid #2b343b;
+        border-left: 10px solid #2b343b;
+        .logo {
+            @include flex-center;
+            height: 10vh;
+            color: #fff;
+            gap: 10px;
+            i {
+                color: #fff;
+                font-size: 2em;
+                z-index: 1;
+            }
+        }
         ul {
             position: absolute;
             top: 0;
@@ -30,7 +43,7 @@
                         height: 30px;
                         background: #2b343b;
                         border-radius: 50%;
-                        box-shadow: 1vw 15px 0 #4187f6;
+                        box-shadow: 10px 15px 0 #4187f6;
                     }
                     & a::after {
                         content: "";
@@ -41,7 +54,7 @@
                         height: 30px;
                         background: #2b343b;
                         border-radius: 50%;
-                        box-shadow: 1vw -15px 0 #4187f6;
+                        box-shadow: 10px -15px 0 #4187f6;
                     }
                 }
                 a {
@@ -67,7 +80,7 @@
                     .title {
                         position: relative;
                         display: block;
-                        padding-left: 1vw;
+                        padding-left: 10px;
                         height: 60px;
                         line-height: 60px;
                         white-space: nowrap;
@@ -83,6 +96,11 @@
         .navigation {
             width: 70px;
             overflow-x: hidden;
+            .logo {
+                h2 {
+                    display: none;
+                }
+            }
         }
     }
 }

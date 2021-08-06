@@ -264,7 +264,6 @@
 }
 @media (max-width: 580px) {
   #signinup {
-	  margin-top: -10vh;
     .sign-in-container {
       width: 90% $i;
     }
@@ -288,9 +287,10 @@
       p {
         display: none;
       }
-	  button{
-		  font-size: 0.5rem;
-	  }
+      button {
+        height: 10vh ;
+        font-size: 0.5rem;
+      }
     }
   }
 }
