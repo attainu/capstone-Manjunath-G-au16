@@ -4,6 +4,8 @@ require("../db/conn");
 const Doubt = require("../models/doubtSchema");
 const Authenticate = require("../middleware/authenticate");
 doubtRouter.use(express.json())
+const cors = require("cors");
+doubtRouter.use(cors());
 
 //Display Doubts 
 //-----------------------------------------

@@ -152,7 +152,7 @@ const SignUpIn = () => {
                 <div id="olayer"></div>
                 <div id="layer"></div>
                 <h1>Welcome Back!</h1>
-                <p>Hello dev! Signup to be a part of Developer family!</p>
+                <p>Hello user! Signup to ask & resolve your doubts!</p>
                 <button class="ghost" id="signIn" onClick={activeSignIn}>
                   Sign In
                 </button>
@@ -160,8 +160,8 @@ const SignUpIn = () => {
               <div class="overlay-panel overlay-right">
                 <div id="olayer"></div>
                 <div id="layer"></div>
-                <h1>Hello, Dev![]</h1>
-                <p>Signin to start a journey with fellow developers</p>
+                <h1>Hello, User![]</h1>
+                <p>Signin to resolve doubts & ask your doubts</p>
                 <button class="ghost" id="signUp" onClick={activeSignUp}>
                   Sign Up
                 </button>

@@ -25,8 +25,32 @@ const AskDoubt = () => {
         } else {
             toast.dark("Asked successfully");
         }
-        history.push("/myDoubts");
+        history.push("/askDoubt");
     };
+    const authenticate = async () => {
+        try {
+            const res = await fetch("/myDoubts", {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+            });
+            const data = await res.json();
+            console.log(data);
+            if (!res.status === 200) {
+                const error = new Error(res.error);
+                throw error;
+            }
+        } catch (err) {
+            console.log(err);
+            history.push("/");
+        }
+    };
+    useEffect(() => {
+        authenticate();
+    }, [])
     return (
         <>
             <Heading heading="Ask Doubt" />

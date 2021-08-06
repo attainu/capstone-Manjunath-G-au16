@@ -59,7 +59,7 @@ const MyDoubts = () => {
             <Heading heading="My Doubts" />
             <div className="mydoubts-sec">
                 <h1>Pending Doubts</h1>
-                {(loading === true) && <h2>Loading</h2>}
+                {(loading === true) && <h3>Loading....</h3>}
                 {
                     doubts.map((item, index) => {
                         return (

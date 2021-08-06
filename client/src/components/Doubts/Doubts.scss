@@ -60,3 +60,34 @@
         }
     }
 }
+.paginationBttns {
+    width: 100%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .paginationBttns a {
+    padding: 1vw;
+    margin: 0.8vw;
+    border-radius: 5px;
+    border: 1px solid $primary-clr;
+    color: $primary-clr;
+    cursor: pointer;
+  }
+  
+  .paginationBttns a:hover {
+    color: $clrWhite;
+    background-color: $primary-clr;
+  }
+  
+  .paginationActive a {
+    color: $clrWhite;
+    background-color: $primary-clr;
+  }
+  
+  .paginationDisabled a {
+    color: $secondary-clr;
+    background-color: grey;
+  }

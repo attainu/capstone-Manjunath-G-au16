@@ -36,8 +36,10 @@ const Answered = () => {
     return (
         <>
             <Heading heading="Answered" />
+            
             <div className="answered-sec">
-                <h1>Answered Doubts</h1>
+                <h1>You Answered Doubts</h1>
+            {(loading === true) && <h3>Loading....</h3>}
                 {
                     doubts.map((item, index) => {
                         return (
