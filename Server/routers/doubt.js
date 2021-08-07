@@ -55,12 +55,12 @@ doubtRouter.get("/answered", Authenticate, async (req, res) => {
 //-----------------------------------------
 doubtRouter.post("/askDoubt", Authenticate, async (req, res) => {
     const askedBy = req.rootUser.email
-    const { question } = req.body;
+    const { question, doubtImg } = req.body;
     if (!question) {
         return res.status(422).json({ Error: "plz fill the field properly" });
     }
     try {
-        const doubt = new Doubt({ askedBy, question });
+        const doubt = new Doubt({ askedBy, question, doubtImg });
         await doubt.save();
         res.status(201).json({ message: "Doubt asked successfully" });
     } catch (err) {

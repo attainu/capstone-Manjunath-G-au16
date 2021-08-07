@@ -134,10 +134,15 @@ const Doubts = () => {
                 :
                 <div className="doubts-sec">
                     <div className="answer-sec">
-                        <button onClick={goBack}>back</button>
+                        <button onClick={goBack}>Back</button>
                         <h3>{doubt.question}</h3>
-                        <textarea name="answer" placeholder="answer"
-                            onChange={(e) => setAnswer(e.target.value)}></textarea>
+                        <div className="ansdoubt-con">
+                            <textarea name="answer" placeholder="answer"
+                                onChange={(e) => setAnswer(e.target.value)}></textarea>
+                            <div className="img">
+                                <img src={doubt.doubtImg} alt="" />
+                            </div>
+                        </div>
                         <div className="btn">
                             <button onClick={() => postAnswer(doubt._id)}>Submit</button>
                         </div>

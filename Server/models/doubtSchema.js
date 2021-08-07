@@ -9,6 +9,10 @@ const doubtSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    doubtImg: {
+        type: String,
+        default: 'https://res.cloudinary.com/modimanju/image/upload/v1628310541/tmorfu79yjlaiqdtc0mu.jpg'
+    },
     answer: {
         type: String,
     },

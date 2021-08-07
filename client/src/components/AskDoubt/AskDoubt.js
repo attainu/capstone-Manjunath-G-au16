@@ -7,15 +7,18 @@ import { useHistory } from "react-router-dom";
 
 const AskDoubt = () => {
     const [ques, setQues] = useState("")
+    const [img, setImg] = useState("")
+    const [pic, setPic] = useState("")
     const history = useHistory();
     const postQues = async () => {
         const question = ques;
+        const doubtImg = pic;
         const res = await fetch("/askDoubt", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ question }),
+            body: JSON.stringify({ question, doubtImg }),
         });
 
         const data = await res.json();
@@ -27,6 +30,33 @@ const AskDoubt = () => {
         }
         history.push("/askDoubt");
     };
+    const handleImg = (e) => {
+        setImg(e.target.files[0]);
+        console.log(e.target.files[0]);
+    }
+    useEffect(() => {
+        uploadImg();
+    }, [img])
+    const uploadImg = () => {
+        const data = new FormData();
+        data.append("file", img);
+        data.append("upload_preset", "merndev");
+        data.append("cloud_name", "modimanju");
+        fetch("https://api.cloudinary.com/v1_1/modimanju/image/upload", {
+            method: "post",
+            body: data,
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.secure_url);
+                setPic(data.secure_url);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        console.log("pic:", pic);
+    }
     const authenticate = async () => {
         try {
             const res = await fetch("/myDoubts", {
@@ -55,7 +85,17 @@ const AskDoubt = () => {
         <>
             <Heading heading="Ask Doubt" />
             <div className="askdoubt-sec">
-                <textarea name="question" placeholder="Doubt?" onChange={(e) => setQues(e.target.value)} required></textarea>
+                <div className="askdoubt-con">
+                    <textarea name="question" placeholder="Doubt?" onChange={(e) => setQues(e.target.value)} required></textarea>
+                    <div className="img">
+                        <input type="file" name="image" id="image" accept="image/*" onChange={handleImg} />
+                        <img src={pic} alt="" />
+                        <label htmlFor="image">
+                            <i className="fas fa-cloud-upload-alt"></i>
+                            <h2>Upload Screenshot</h2>
+                        </label>
+                    </div>
+                </div>
                 <div className="btn">
                     <button onClick={postQues}>Ask</button>
                 </div>
