@@ -35,7 +35,8 @@ const AskDoubt = () => {
         console.log(e.target.files[0]);
     }
     useEffect(() => {
-        uploadImg();
+        (img !== "") &&
+            uploadImg();
     }, [img])
     const uploadImg = () => {
         const data = new FormData();
@@ -86,7 +87,7 @@ const AskDoubt = () => {
             <Heading heading="Ask Doubt" />
             <div className="askdoubt-sec">
                 <div className="askdoubt-con">
-                    <textarea name="question" placeholder="Doubt?" onChange={(e) => setQues(e.target.value)} required></textarea>
+                    <textarea name="question" placeholder="Type your Doubt?" onChange={(e) => setQues(e.target.value)} required></textarea>
                     <div className="img">
                         <input type="file" name="image" id="image" accept="image/*" onChange={handleImg} />
                         <img src={pic} alt="" />

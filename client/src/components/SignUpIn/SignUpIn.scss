@@ -27,7 +27,9 @@
   h2 {
     text-align: center;
   }
-
+  h3 {
+    display: none;
+  }
   p {
     font-size: 14px;
     font-weight: 100;
@@ -46,6 +48,7 @@
     text-transform: uppercase;
     transition: transform 80ms ease-in;
     cursor: pointer;
+    font-size: 0.8rem;
     // mix-blend-mode: difference;
   }
 
@@ -156,6 +159,7 @@
     overflow: hidden;
     transition: transform 0.6s ease-in-out;
     z-index: 100;
+    cursor: pointer;
   }
 
   .container.right-panel-active .overlay-container {
@@ -271,6 +275,9 @@
       width: 100% $i;
       left: -90%;
     }
+    h3{
+      display: block;
+    }
     .overlay-container {
       opacity: 1;
       width: 20%;
@@ -288,7 +295,7 @@
         display: none;
       }
       button {
-        height: 10vh ;
+        height: 10vh;
         font-size: 0.5rem;
       }
     }

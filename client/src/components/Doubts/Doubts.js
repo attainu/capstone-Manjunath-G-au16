@@ -56,6 +56,7 @@ const Doubts = () => {
     }
     const getDoubt = async (ID) => {
         setActive(false)
+        setLoading(true)
         try {
             const res = await fetch(`/doubts/${ID}`, {
                 method: "GET",
@@ -68,6 +69,7 @@ const Doubts = () => {
             const data = await res.json();
             setDoubt(data);
             console.log(data);
+            setLoading(false)
             if (!res.status === 200) {
                 const error = new Error(res.error);
                 throw error;
@@ -103,8 +105,8 @@ const Doubts = () => {
     return (
         <>
             <Heading heading="Doubts" />
-            {loading ? <div className="loaderx"><ScaleLoader
-                color={"#2b343b"} loading={loading} size={0} /></div> : <></>}
+            {loading && <div className="loaderx"><ScaleLoader
+                color={"#2b343b"} loading={loading} size={0} /></div>}
 
             {(active === true) ?
                 <div className="doubts-sec">
@@ -138,7 +140,7 @@ const Doubts = () => {
                         <button onClick={goBack}>Back</button>
                         <h3>{doubt.question}</h3>
                         <div className="ansdoubt-con">
-                            <textarea name="answer" placeholder="answer"
+                            <textarea name="answer" placeholder="Type your answer...."
                                 onChange={(e) => setAnswer(e.target.value)}></textarea>
                             <div className="img" onClick={() => setModalIsOpen(true)}>
                                 <img src={doubt.doubtImg} alt="" />
@@ -155,6 +157,7 @@ const Doubts = () => {
                             isOpen={modalIsOpen}
                             className="Modal"
                             overlayClassName="Overlay"
+                            ariaHideApp={false}
                         >
                             <div className="mclose-btn">
                                 <button onClick={() => setModalIsOpen(false)}>

@@ -154,15 +154,18 @@ const SignUpIn = () => {
                 <h1>Welcome Back!</h1>
                 <p>Hello user! Signup to ask & resolve your doubts!</p>
                 <button class="ghost" id="signIn" >
+                 <h3>Click here</h3>
                   Sign In
                 </button>
               </div>
               <div class="overlay-panel overlay-right" onClick={activeSignUp}>
                 <div id="olayer"></div>
                 <div id="layer"></div>
-                <h1>Hello, User![]</h1>
+                <h1>Click Here!!</h1>
                 <p>Signin to resolve doubts & ask your doubts</p>
+                
                 <button class="ghost" id="signUp" >
+                 <h3>Click here</h3>
                   Sign Up
                 </button>
               </div>

@@ -105,6 +105,10 @@
             display: grid;
             grid-template-rows: 1fr;
             grid-template-columns: 1fr;
+            .loader {
+                width: 100%;
+                @include flex-center;
+            }
             input[type="file"] {
                 display: none;
             }
@@ -146,6 +150,27 @@
             cursor: pointer;
             border-top-left-radius: 10px;
             border-bottom-right-radius: 10px;
+        }
+    }
+}
+
+@media (max-width: 896px) {
+    .edit-sec {
+        .editdoubt-con {
+            grid-template-columns: 1fr;
+            grid-template-rows: 0.5fr 1fr;
+            textarea {
+                height: 40vh;
+                grid-column: 1;
+                grid-row: 2;
+            }
+            .img {
+                grid-column: 1;
+                grid-row: 1;
+            }
+        }
+        .btn {
+            width: 100%;
         }
     }
 }

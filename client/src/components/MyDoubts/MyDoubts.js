@@ -16,6 +16,7 @@ const MyDoubts = () => {
     const [prevImg, setPrevImg] = useState("")
     const [pic, setPic] = useState("")
     const [loading, setLoading] = useState(true)
+    const [loadingImg, setLoadingImg] = useState(true)
     const [active, setActive] = useState()
     const history = useHistory();
     const callDoubtsPage = async () => {
@@ -57,6 +58,9 @@ const MyDoubts = () => {
                 const error = new Error(res.error);
                 throw error;
             }
+            else {
+                toast.dark("Deleted");
+            }
         } catch (err) {
             console.log(err);
             history.push("/myDoubts");
@@ -79,6 +83,7 @@ const MyDoubts = () => {
                 _id: data._id
             });
             setPrevImg(data.doubtImg)
+            setLoadingImg(false);
             console.log(data);
             if (!res.status === 200) {
                 const error = new Error(res.error);
@@ -98,9 +103,12 @@ const MyDoubts = () => {
         setImg(e.target.files[0]);
     }
     useEffect(() => {
-        changeImg();
+        (img !== "") &&
+            changeImg()
+
     }, [img])
     const changeImg = () => {
+        setLoadingImg(true)
         const data = new FormData();
         data.append("file", img);
         data.append("upload_preset", "merndev");
@@ -113,6 +121,7 @@ const MyDoubts = () => {
             .then((data) => {
                 console.log(data.secure_url);
                 setPic(data.secure_url);
+                setLoadingImg(false)
             })
             .catch((err) => {
                 console.log(err);
@@ -143,6 +152,7 @@ const MyDoubts = () => {
     }
     const goBack = () => {
         setActive(true)
+        setLoadingImg(true)
     }
     useEffect(() => {
         callDoubtsPage();
@@ -151,8 +161,8 @@ const MyDoubts = () => {
         <div>
             <Heading heading="My Doubts" />
 
-            {loading ? <div className="loaderx"><ScaleLoader
-                color={"#2b343b"} loading={loading} size={0} /></div> : <></>}
+            {loading && <div className="loaderx"><ScaleLoader
+                color={"#2b343b"} loading={loading} /></div>}
 
             {(active === true) ?
                 <div className="mydoubts-sec">
@@ -177,7 +187,7 @@ const MyDoubts = () => {
                                 <div key={index} className="pending-sec">
                                     <h3>{item.question}</h3>
                                     <h3>{item.answer}</h3>
-                                    <button onClick={() => delDoubt(item._id)} >delete</button>
+                                    <button onClick={() => delDoubt(item._id)} >Delete</button>
                                 </div>
 
                             )
@@ -192,13 +202,21 @@ const MyDoubts = () => {
                     <div className="editdoubt-con">
                         <textarea name="question" value={doubt.question}
                             onChange={handleInputs}></textarea>
+
                         <div className="img">
+
                             <input type="file" name="image" id="image" accept="image/*" onChange={handleImg} />
-                            <img src={(pic === undefined) ? prevImg : pic} alt="" />
-                            <label htmlFor="image">
-                                <i className="fas fa-sync-alt"></i>
-                                <h2>Change Image</h2>
-                            </label>
+                            {loadingImg ? <div className="loader">
+                                <ScaleLoader color={"#2b343b"} loading={loadingImg} />
+                            </div> :
+                                <>
+                                    <img src={(pic === "") ? prevImg : pic} alt="" />
+                                    <label htmlFor="image">
+                                        <i className="fas fa-sync-alt"></i>
+                                        <h3>Change Image</h3>
+                                    </label>
+                                </>
+                            }
                         </div>
                     </div>
                     <div className="btn">
