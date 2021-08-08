@@ -1,7 +1,6 @@
 @import "../../scss/defaults.scss";
 @import "../../scss/variables.scss";
 
-
 .mydoubts-sec {
     @include grid-center;
     gap: 20px;
@@ -79,18 +78,65 @@
             margin-bottom: 10px;
         }
     }
-    textarea {
-        width: 75vw;
-        height: 50vh;
-        border-radius: 10px;
-        border: 5px solid $primary-clr;
-        outline: none;
-        padding: 10px;
-    }
 
+    .editdoubt-con {
+        width: 75vw;
+        display: grid;
+        grid-template-columns: 0.7fr 0.3fr;
+        grid-template-rows: 1fr;
+        gap: 1vw;
+        textarea {
+            grid-column: 1;
+            grid-row: 1;
+            height: 50vh;
+            height: 50vh;
+            border-radius: 10px;
+            border: 5px solid $primary-clr;
+            outline: none;
+            padding: 10px;
+        }
+        .img {
+            grid-column: 2;
+            grid-row: 1;
+            border: 5px solid $primary-clr;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            display: grid;
+            grid-template-rows: 1fr;
+            grid-template-columns: 1fr;
+            input[type="file"] {
+                display: none;
+            }
+            label {
+                width: 100%;
+                @include flex-center;
+                bottom: 0;
+                position: absolute;
+                color: $clrWhite;
+                background: $primary-clr;
+                cursor: pointer;
+                padding: 5px;
+                gap: 10px;
+                border-radius: 5px;
+                i {
+                    font-size: 1.5rem;
+                }
+            }
+            img {
+                grid-row: 1;
+                grid-column: 1;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                filter: opacity(0.9);
+            }
+        }
+    }
     .btn {
         @include grid-center;
         margin-top: 10px;
+        width: 55vw;
         button {
             background: $primary-clr;
             color: $clrWhite;

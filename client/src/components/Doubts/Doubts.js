@@ -6,6 +6,7 @@ import Heading from '../Common/Heading/Heading';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import Modal from "react-modal";
 
 
 const Doubts = () => {
@@ -14,7 +15,7 @@ const Doubts = () => {
     const [answerr, setAnswer] = useState("")
     const [active, setActive] = useState()
     const [loading, setLoading] = useState(true)
-
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [pageNumber, setPageNumber] = useState(0);
     const usersPerPage = 4;
     const pagesVisited = pageNumber * usersPerPage;
@@ -111,7 +112,7 @@ const Doubts = () => {
                     {
                         doubts.slice(pagesVisited, pagesVisited + usersPerPage).map((item, index) => {
                             return (
-                                <div key={index} className="question-sec">
+                                <div key={index} className="question-sec" onClick={() => getDoubt(item._id)}>
                                     <h3>{item.question}</h3>
                                     <button onClick={() => getDoubt(item._id)}>Answer</button>
                                 </div>
@@ -139,13 +140,34 @@ const Doubts = () => {
                         <div className="ansdoubt-con">
                             <textarea name="answer" placeholder="answer"
                                 onChange={(e) => setAnswer(e.target.value)}></textarea>
-                            <div className="img">
+                            <div className="img" onClick={() => setModalIsOpen(true)}>
                                 <img src={doubt.doubtImg} alt="" />
+                                <div className="view-sec">
+                                    <i class="fas fa-eye"></i>
+                                    <h2>Click to view</h2>
+                                </div>
                             </div>
                         </div>
                         <div className="btn">
                             <button onClick={() => postAnswer(doubt._id)}>Submit</button>
                         </div>
+                        <Modal
+                            isOpen={modalIsOpen}
+                            className="Modal"
+                            overlayClassName="Overlay"
+                        >
+                            <div className="mclose-btn">
+                                <button onClick={() => setModalIsOpen(false)}>
+                                    <i className="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div className="modal-sec">
+
+                                <div className="mimg" onClick={() => setModalIsOpen(false)}>
+                                    <img src={doubt.doubtImg} alt="" />
+                                </div>
+                            </div>
+                        </Modal>
                     </div>
                 </div>
             }

@@ -10,8 +10,11 @@ doubtRouter.use(cors());
 //Display Doubts 
 //-----------------------------------------
 doubtRouter.get("/doubts", Authenticate, async (req, res) => {
+    const user = req.rootUser.email
     try {
         doubts = await Doubt.find({ status: "pending" });
+        // const result = doubts.filter(doubt => doubt.askedBy !== user);
+        // res.status(200).send(result);
         res.status(200).send(doubts);
     } catch (err) {
         res.status(500).send(err)

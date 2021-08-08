@@ -12,8 +12,9 @@ const MyDoubts = () => {
         question: "",
         _id: ""
     })
-
-    const [edit, setEdit] = useState("")
+    const [img, setImg] = useState("")
+    const [prevImg, setPrevImg] = useState("")
+    const [pic, setPic] = useState("")
     const [loading, setLoading] = useState(true)
     const [active, setActive] = useState()
     const history = useHistory();
@@ -77,6 +78,7 @@ const MyDoubts = () => {
                 question: data.question,
                 _id: data._id
             });
+            setPrevImg(data.doubtImg)
             console.log(data);
             if (!res.status === 200) {
                 const error = new Error(res.error);
@@ -92,15 +94,42 @@ const MyDoubts = () => {
         const value = e.target.value;
         setDoubt({ ...doubt, [name]: value });
     };
+    const handleImg = (e) => {
+        setImg(e.target.files[0]);
+    }
+    useEffect(() => {
+        changeImg();
+    }, [img])
+    const changeImg = () => {
+        const data = new FormData();
+        data.append("file", img);
+        data.append("upload_preset", "merndev");
+        data.append("cloud_name", "modimanju");
+        fetch("https://api.cloudinary.com/v1_1/modimanju/image/upload", {
+            method: "post",
+            body: data,
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data.secure_url);
+                setPic(data.secure_url);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        console.log("pic:", pic);
+    }
     const postEdit = async (ID) => {
         const { question } = doubt;
+        const doubtImg = pic
         const res = await fetch(`/editDoubt/${ID}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                question
+                question,
+                doubtImg
             }),
         });
         const data = await res.json();
@@ -124,6 +153,7 @@ const MyDoubts = () => {
 
             {loading ? <div className="loaderx"><ScaleLoader
                 color={"#2b343b"} loading={loading} size={0} /></div> : <></>}
+
             {(active === true) ?
                 <div className="mydoubts-sec">
                     <h1>Pending Doubts</h1>
@@ -136,7 +166,6 @@ const MyDoubts = () => {
                                     <button onClick={() => delDoubt(item._id)} >Delete</button>
                                     <button onClick={() => getDoubt(item._id)} >Edit</button>
                                 </div>
-
                             )
                         })
                     }
@@ -157,18 +186,26 @@ const MyDoubts = () => {
                 </div> : (active === false) &&
                 <div className="edit-sec">
                     <div className="back-btn">
-                        <button onClick={goBack}>back</button>
+                        <button onClick={goBack}>Back</button>
                     </div>
 
-                    <textarea name="question" value={doubt.question}
-                        onChange={handleInputs}></textarea>
+                    <div className="editdoubt-con">
+                        <textarea name="question" value={doubt.question}
+                            onChange={handleInputs}></textarea>
+                        <div className="img">
+                            <input type="file" name="image" id="image" accept="image/*" onChange={handleImg} />
+                            <img src={(pic === undefined) ? prevImg : pic} alt="" />
+                            <label htmlFor="image">
+                                <i className="fas fa-sync-alt"></i>
+                                <h2>Change Image</h2>
+                            </label>
+                        </div>
+                    </div>
                     <div className="btn">
                         <button onClick={() => postEdit(doubt._id)}>update</button>
                     </div>
-
-
-                </div>}
-
+                </div>
+            }
             <ToastContainer position="top-right" />
         </div>
     )
