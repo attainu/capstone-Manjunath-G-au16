@@ -6,7 +6,7 @@
         height: 100vh;
         width: 20vw;
         background: #2b343b;
-        box-shadow: 1vw 0 0 #4187f6;
+        box-shadow: 1vw 0 0 $primary-clr;
         border-left: 10px solid #2b343b;
         .logo {
             @include flex-center;
@@ -33,7 +33,7 @@
                 border-top-left-radius: 20px;
                 border-bottom-left-radius: 20px;
                 &.active {
-                    background: #4187f6;
+                    background: $primary-clr;
                     & a::before {
                         content: "";
                         position: absolute;
@@ -43,7 +43,7 @@
                         height: 30px;
                         background: #2b343b;
                         border-radius: 50%;
-                        box-shadow: 10px 15px 0 #4187f6;
+                        box-shadow: 10px 15px 0 $primary-clr;
                     }
                     & a::after {
                         content: "";
@@ -54,7 +54,7 @@
                         height: 30px;
                         background: #2b343b;
                         border-radius: 50%;
-                        box-shadow: 10px -15px 0 #4187f6;
+                        box-shadow: 10px -15px 0 $primary-clr;
                     }
                 }
                 a {

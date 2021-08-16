@@ -22,32 +22,25 @@ const Sidebar = () => {
                 </div>
                 <ul>
                     <li className="list active">
-                        <NavLink className="nav-link" to="/doubts">
+                        <NavLink className="nav-link" to="/videos">
                             <span className="icon">
                                 <i className="fas fa-question-circle"></i>
                             </span>
-                            <span className="title">Doubts</span>
+                            <span className="title">Videos</span>
                         </NavLink>
                     </li>
                     <li className="list">
-                        <NavLink className="nav-link" to="/askDoubt">
+                        <NavLink className="nav-link" to="/uploadVideo">
                             <span className="icon">
                                 <i className="fas fa-question-circle"></i></span>
-                            <span className="title">Ask Doubts</span>
+                            <span className="title">Upload Video</span>
                         </NavLink>
                     </li>
                     <li className="list">
-                        <NavLink className="nav-link" to="/myDoubts">
+                        <NavLink className="nav-link" to="/myVideos">
                             <span className="icon">
                                 <i className="fas fa-question-circle"></i></span>
-                            <span className="title">My Doubts</span>
-                        </NavLink>
-                    </li>
-                    <li className="list">
-                        <NavLink className="nav-link" to="/answered">
-                            <span className="icon">
-                                <i className="fas fa-question-circle"></i></span>
-                            <span className="title">You Answered</span>
+                            <span className="title">My Videos</span>
                         </NavLink>
                     </li>
                     <li className="list">
