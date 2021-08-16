@@ -10,6 +10,7 @@ import SignUpIn from './components/SignUpIn/SignUpIn';
 import Sidebar from './components/Common/Sidebar/Sidebar';
 import Logout from './components/Logout/Logout';
 import VideoHome from './components/VideoHome/VideoHome';
+import Upload from './components/Upload/Upload';
 const Routing = () => {
     return (
         <main>
@@ -20,14 +21,11 @@ const Routing = () => {
                 <Route path="/videos" exact>
                     <VideoHome />
                 </Route>
-                {/* <Route path="/askDoubt" exact>
-                    <AskDoubt />
+                <Route path="/uploadVideo" exact>
+                    <Upload />
                 </Route>
-                <Route path="/myDoubts" exact>
+                {/* <Route path="/myDoubts" exact>
                     <MyDoubts />
-                </Route>
-                <Route path="/answered" exact>
-                    <Answered />
                 </Route> */}
                 <Route path="/logout" exact>
                     <Logout />
