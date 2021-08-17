@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import Heading from '../Common/Heading/Heading';
-import "./VideoHome.scss";
+import "./MyVideos.scss";
 import { useHistory } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScaleLoader from "react-spinners/ScaleLoader";
 
-const VideoHome = () => {
+const MyVideos = () => {
     const [videos, setVideos] = useState([])
     const [video, setVideo] = useState({})
     const [active, setActive] = useState()
@@ -15,7 +15,7 @@ const VideoHome = () => {
     const fetchVideos = async () => {
         setActive(true)
         try {
-            const res = await fetch("/videos", {
+            const res = await fetch("/myVideos", {
                 method: "GET",
                 headers: {
                     Accept: "application/json",
@@ -56,7 +56,7 @@ const VideoHome = () => {
             }
         } catch (err) {
             console.log(err);
-            history.push("/videoHome");
+            history.push("/myVideos");
         }
     }
     useEffect(() => {
@@ -94,4 +94,4 @@ const VideoHome = () => {
     )
 }
 
-export default VideoHome
+export default MyVideos

@@ -11,6 +11,7 @@ import Sidebar from './components/Common/Sidebar/Sidebar';
 import Logout from './components/Logout/Logout';
 import VideoHome from './components/VideoHome/VideoHome';
 import Upload from './components/Upload/Upload';
+import MyVideos from './components/MyVideos/MyVideos';
 const Routing = () => {
     return (
         <main>
@@ -24,9 +25,9 @@ const Routing = () => {
                 <Route path="/uploadVideo" exact>
                     <Upload />
                 </Route>
-                {/* <Route path="/myDoubts" exact>
-                    <MyDoubts />
-                </Route> */}
+                <Route path="/myVideos" exact>
+                    <MyVideos />
+                </Route>
                 <Route path="/logout" exact>
                     <Logout />
                 </Route>
