@@ -10,6 +10,7 @@ require("./db/conn");
 
 app.use(require("./routers/user"));
 app.use(require("./routers/video"));
+app.use(require("./routers/comment"));
 
 app.use(express.json());
 
