@@ -22,5 +22,39 @@ commentRouter.post("/uploadComment", Authenticate, async (req, res) => {
         res.status(500).send(err)
     }
 });
-
+//Display comments
+//-----------------------------------------
+commentRouter.get("/comments/:id", Authenticate, async (req, res) => {
+    const id = req.params.id
+    try {
+        comments = await Comment.find({ videoID: id });
+        res.status(200).send(comments);
+    } catch (err) {
+        res.status(500).send(err)
+    }
+});
+//Edit Comment
+//--------------------
+commentRouter.put("/editComment/:id", Authenticate, async (req, res) => {
+    const _id = req.params.id
+    try {
+        const comment = await Comment.findByIdAndUpdate(_id, req.body, {
+            new: true
+        })
+        res.status(200).send(comment)
+    } catch (err) {
+        res.status(500).send(err)
+    }
+});
+//Delete Comment
+//--------------------
+commentRouter.delete("/deleteComment/:id", Authenticate, async (req, res) => {
+    try {
+        const _id = req.params.id
+        const comment = await Comment.findByIdAndDelete(_id)
+        res.status(200).json({ message: "Comment deleted successfully" })
+    } catch (err) {
+        res.status(500).send(err)
+    }
+});
 module.exports = commentRouter;
