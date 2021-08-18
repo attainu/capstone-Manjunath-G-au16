@@ -31,6 +31,13 @@
 .onevideo {
     width: 78vw;
     @include grid-center;
+    .btn {
+        button {
+            float: right;
+            @include button-italic;
+        }
+        margin-bottom: 5px;
+    }
     .video {
         width: 75vw;
         height: 80vh;
@@ -43,6 +50,89 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+    }
+    .comment-sec {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        padding: 10px;
+        input {
+            padding: 10px;
+            width: 100%;
+            outline: none;
+            border: none;
+            border-bottom: 2px solid $primary-clr;
+        }
+        button {
+            @include button;
+        }
+    }
+    .comments-sec {
+        .comments {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            padding: 10px;
+            input {
+                width: 100%;
+                outline: none;
+                border: none;
+                border-bottom: 2px solid $primary-clr;
+            }
+            .btn {
+                display: flex;
+                flex-direction: row;
+                button:nth-child(1) {
+                    @include button-italic;
+                }
+                button:nth-child(2) {
+                    @include button-secondary;
+                    &:hover {
+                        color: $clrBlack;
+                    }
+                }
+            }
+            .comment-details {
+                width: 100%;
+                padding: 5px;
+                .user {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    .user-logo {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 10px;
+                        h3 {
+                            border-radius: 50%;
+                            background: $primary-clr;
+                            padding: 10px 12px;
+                            text-transform: uppercase;
+                            color: $clrWhite;
+                        }
+                        h4 {
+                            text-transform: capitalize;
+                            color: $clrGrey;
+                        }
+                        h5 {
+                            font-weight: 400;
+                        }
+                    }
+                    .btn {
+                        float: right;
+                        display: flex;
+                        flex-direction: row;
+                        gap: 10px;
+                        button {
+                            @include button-italic;
+                        }
+                    }
+                }
+            }
         }
     }
 }

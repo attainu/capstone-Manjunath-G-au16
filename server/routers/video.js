@@ -83,4 +83,29 @@ videoRouter.delete("/deleteVideo/:id", Authenticate, async (req, res) => {
     }
 });
 
+//Comment Video
+//--------------------
+videoRouter.post("/comment/:id", Authenticate, async (req, res) => {
+    const _id = req.params.id
+    const commentBy = req.rootUser.email
+    try {
+        const { comment } = req.body;
+        if (!comment) {
+            console.log("Plz fill the comment section");
+            return res.json({ error: "plz fill the comment section" });
+        }
+        const userComment = await Video.findOne({ _id: _id });
+
+        if (userComment) {
+            const userCommentDetails = await userComment.addComment(
+                comment,
+                commentBy,
+            );
+            await userComment.save();
+            res.status(201).json({ message: "User comment  sent successfully" });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
 module.exports = videoRouter;
